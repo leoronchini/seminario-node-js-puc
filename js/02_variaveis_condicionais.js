@@ -4,13 +4,13 @@ const nome = "jose";
 const idade = 20;
 
 // Variáveis 'let' podem ter seu valor alterado
-let statusCadastro = "Em análise";
+let statusCadastro;
 
 console.log("Candidato:", nome);
 console.log("Idade:", idade);
 console.log("Status inicial:", statusCadastro);
 
-if (idade >= 18) {
+if (idade <= 18) {
 
     statusCadastro = "Aprovado para iniciar processo";
 
