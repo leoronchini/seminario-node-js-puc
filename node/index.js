@@ -19,7 +19,6 @@ app.get("/games", (req, res) => {
     res.json(games);
 });
 
-
 //Inicia servidor
 app.listen(3000, () => {
 
