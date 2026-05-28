@@ -1,6 +1,9 @@
 import {
     findAllGames,
-    createGameRepository
+    createGameRepository,
+    findGameById,
+    updateGameRepository,
+    deleteGameRepository
 } from "../repositories/game.repository";
 
 export const getGames = async () => {
@@ -32,4 +35,62 @@ export const createGameService = async (
         categoria,
         nota
     );
+};
+
+export const getGameByIdService = async (
+    id: number
+) => {
+
+    const game = await findGameById(id);
+
+    if (!game) {
+
+        throw new Error(
+            "Jogo não encontrado"
+        );
+    }
+
+    return game;
+};
+
+
+export const updateGameService = async (
+    id: number,
+    nome: string,
+    categoria: string,
+    nota: number
+) => {
+
+    const game = await findGameById(id);
+
+    if (!game) {
+
+        throw new Error(
+            "Jogo não encontrado"
+        );
+    }
+
+    return await updateGameRepository(
+        id,
+        nome,
+        categoria,
+        nota
+    );
+};
+
+
+export const deleteGameService = async (
+    id: number
+) => {
+
+    const game = await findGameById(id);
+
+    if (!game) {
+
+        throw new Error(
+            "Jogo não encontrado"
+        );
+    }
+
+    await deleteGameRepository(id);
 };

@@ -2,7 +2,10 @@ import { Router } from "express";
 
 import {
     findGames,
-    createNewGame
+    createNewGame,
+    findGameByIdController,
+    updateGameController,
+    deleteGameController
 } from "../controllers/game.controller";
 
 const router = Router();
@@ -20,3 +23,18 @@ export default router;
 //     "categoria": "esportes",
 //     "nota": 10
 // }
+
+router.get(
+    "/games/:id",
+    findGameByIdController
+);
+
+router.put(
+    "/games/:id",
+    updateGameController
+);
+
+router.delete(
+    "/games/:id",
+    deleteGameController
+);
