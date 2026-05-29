@@ -1,147 +1,89 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8" />
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    />
-
-    <title>Seminário Node.js PUC Minas</title>
-
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameVault</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-    <header class="hero">
-
-        <div class="overlay"></div>
-
-        <div class="hero-content">
-
-            <h1>
-                Projeto Final do Seminário de Node.js
-            </h1>
-
-            <h2>
-                Ciência da Computação • PUC Minas Poços de Caldas 2026
-            </h2>
-
-            <p>
-                Seminário ministrado por Leonardo Ronchini
-            </p>
-
-            <div class="badges">
-                <span>Node.js</span>
-                <span>TypeScript</span>
-                <span>Express</span>
-                <span>PostgreSQL</span>
-                <span>Arquitetura Backend</span>
-            </div>
-
+    <header>
+        <div class="container header-container">
+            <h1>GameVault</h1>
+            <button id="btnNovoJogo" class="btn btn-success" onclick="openGameModal()">+ Cadastrar Jogo</button>
         </div>
-
     </header>
 
     <main class="container">
-
-        <section class="card">
-
-            <h3>
-                Sobre o Projeto
-            </h3>
-
-            <p>
-                Projeto final do seminário de Node.js do curso de Ciência da Computação PUC Minas Poços de Caldas 2026.
-            </p>
-
-            <p>
-                Aplicando técnicas de arquitetura em camadas, APIs REST, integração frontend/backend,
-                TypeScript, PostgreSQL, Repository Pattern, controllers, services, rotas e comunicação HTTP.
-            </p>
-
-        </section>
-
-        <section class="card">
-
-            <h3>
-                Tecnologias Utilizadas
-            </h3>
-
-            <div class="tech-grid">
-
-                <div class="tech-item">
-                    <h4>Node.js</h4>
-                    <p>
-                        Runtime JavaScript backend.
-                    </p>
-                </div>
-
-                <div class="tech-item">
-                    <h4>Express</h4>
-                    <p>
-                        Framework para APIs REST.
-                    </p>
-                </div>
-
-                <div class="tech-item">
-                    <h4>TypeScript</h4>
-                    <p>
-                        Tipagem estática e organização.
-                    </p>
-                </div>
-
-                <div class="tech-item">
-                    <h4>PostgreSQL</h4>
-                    <p>
-                        Banco de dados relacional.
-                    </p>
-                </div>
-
+        <section class="table-section">
+            <div class="table-responsive">
+                <table id="gamesTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Categoria</th>
+                            <th>Nota</th>
+                            <th class="actions-col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
             </div>
-
         </section>
-
-        <section class="card">
-
-            <div class="section-header">
-
-                <h3>
-                    Jogos cadastrados
-                </h3>
-
-                <button id="loadGamesButton">
-                    Atualizar Lista
-                </button>
-
-            </div>
-
-            <div id="gamesContainer">
-
-                <p class="loading">
-                    Clique em "Atualizar Lista"
-                </p>
-
-            </div>
-
-        </section>
-
+        
+        <p class="footer-text">
+            Projeto final do seminario de Node.js do curso de Ciencia da Computação PUC Minas Poços de Caldas 2026 - Seminario por Leonardo Ronchini. Aplicando técnicas de consumo de APIs RESTful, manipulação assíncrona do DOM e estruturação de interfaces responsivas com Vanilla JS.
+        </p>
     </main>
 
-    <footer>
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Cadastrar Jogo</h2>
+                <span class="close-btn" onclick="closeModal('gameModal')">&times;</span>
+            </div>
+            <form id="gameForm">
+                <div class="form-group">
+                    <label for="nome">Nome do Jogo</label>
+                    <input type="text" id="nome" required placeholder="Ex: Fifa">
+                </div>
 
-        <p>
-            PUC Minas Poços de Caldas • 2026
-        </p>
+                <div class="form-group">
+                    <label for="categoria">Categoria</label>
+                    <input type="text" id="categoria" required placeholder="Ex: Esportes">
+                </div>
 
-    </footer>
+                <div class="form-group">
+                    <label for="nota">Nota (0 a 10)</label>
+                    <input type="number" id="nota" min="0" max="10" required placeholder="Ex: 9">
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('gameModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnSalvar">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="deleteModal" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h2>Confirmar Exclusão</h2>
+                <span class="close-btn" onclick="closeModal('deleteModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja excluir este jogo? Esta ação não pode ser desfeita.</p>
+            </div>
+            <div class="form-actions mt-20">
+                <button class="btn btn-secondary" onclick="closeModal('deleteModal')">Cancelar</button>
+                <button class="btn btn-danger" onclick="confirmDelete()">Sim, Excluir</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
-
 </body>
-
 </html>
-

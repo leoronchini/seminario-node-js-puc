@@ -1,11 +1,11 @@
 import { Router } from "express";
 
 import {
-    findGames,
-    createNewGame,
-    findGameByIdController,
-    updateGameController,
-    deleteGameController
+findGames,
+createNewGame,
+findGameByIdController,
+updateGameController,
+deleteGameController
 } from "../controllers/game.controller";
 
 const router = Router();
@@ -13,9 +13,6 @@ const router = Router();
 router.get("/games", findGames);
 
 router.post("/games", createNewGame);
-
-export default router;
-
 
 //exemplo de payload:
 // {
@@ -25,16 +22,18 @@ export default router;
 // }
 
 router.get(
-    "/games/:id",
-    findGameByIdController
+"/games/:id",
+findGameByIdController
 );
 
 router.put(
-    "/games/:id",
-    updateGameController
+"/games/:id",
+updateGameController
 );
 
 router.delete(
-    "/games/:id",
-    deleteGameController
+"/games/:id",
+deleteGameController
 );
+
+export default router;
